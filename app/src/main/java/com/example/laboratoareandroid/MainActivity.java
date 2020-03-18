@@ -3,6 +3,7 @@ package com.example.laboratoareandroid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     ListView listaIteme;
     TextView textDisponibil;
+    TextView textView;
     String[] ListElements = new String[] {
             "Android",
             "PHP",
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         listaIteme = findViewById(R.id.listaIteme);
         textDisponibil = findViewById(R.id.textDisponibil);
+        textView = findViewById(R.id.textView4);
         final List<String> ListElementsArrayList = new ArrayList<>(Arrays.asList(ListElements));
         final ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (MainActivity.this, android.R.layout.simple_list_item_1, ListElementsArrayList);
@@ -123,6 +131,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.id3:
                 openLoginMenu();
                 return true;
+            case R.id.id4:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -136,6 +147,36 @@ public class MainActivity extends AppCompatActivity {
     public void openLoginMenu() {
         Intent intent = new Intent(this, Optiune3Activity.class);
         startActivity(intent);
+    }
+
+    public void openSettings(){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void saveContent(View view){
+        Context context = getApplicationContext();
+        String filename = "myfile.txt";
+        File file = new File(context.getFilesDir(), filename);
+        String fileContents = (String) textDisponibil.getText();
+        try (FileOutputStream fos = context.openFileOutput(filename, Context.MODE_PRIVATE)) {
+            fos.write(fileContents.getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] data = new byte[(int) file.length()];
+            fileInputStream.read(data);
+            fileInputStream.close();
+            textView.setText("Text salvat: " + new String(data));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

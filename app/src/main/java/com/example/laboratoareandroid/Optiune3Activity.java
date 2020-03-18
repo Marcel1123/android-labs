@@ -35,6 +35,9 @@ public class Optiune3Activity extends AppCompatActivity {
                 return true;
             case R.id.id3:
                 return true;
+            case R.id.id4:
+                openSettings();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -47,6 +50,11 @@ public class Optiune3Activity extends AppCompatActivity {
 
     public void goOptiune2() {
         Intent intent = new Intent(this, Optiune2Activity.class);
+        startActivity(intent);
+    }
+
+    public void openSettings(){
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 

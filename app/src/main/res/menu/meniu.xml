@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Optiune 1"
+    <item android:title="Home"
             android:id="@+id/id1"/>
-    <item android:title="Optiune 3"
+    <item android:title="Warning"
         android:id="@+id/id3"/>
-    <item android:title="Optiune 4"
+    <item android:title="Settings"
         android:id="@+id/id4"/>
-    <item android:title="Optiune 2"
+    <item android:title="Filter"
         android:id="@+id/id2"/>
 </menu>
