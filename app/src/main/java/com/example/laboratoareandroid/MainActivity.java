@@ -158,6 +158,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, SensorActivity.class));
     }
 
+    public void goToCamera(View view){
+        startActivity(new Intent(this, CameraActivity.class));
+    }
+
     public void saveContent(View view){
 
         Context context = getApplicationContext();
